@@ -8,11 +8,35 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>Calculator</h3>
 
   <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+    Select your coin type
   </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-list>
+    <ion-row>
+      <ion-item>
+        <ion-input [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversion()"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversion()">
+            <ion-option *ngFor="let c of coins; let i = index" [selected]="i==0" [value]="c">{{c.title}}</ion-option>
+          </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-item>
+    </ion-item>
+    <ion-row>
+        <ion-item>
+          <ion-input [(ngModel)]="currencyToAmount"  (ionChange)="refreshConversion()"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversion()">
+              <ion-option *ngFor="let cur of currency; let i = index" [selected]="i==0" [value]="cur">{{cur.title}}</ion-option>
+            </ion-select>
+        </ion-item>
+      </ion-row>
+  
+  </ion-list>
 </ion-content>
