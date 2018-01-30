@@ -1,3 +1,37 @@
+<ng-template #currencyFromHtml>
+    <ion-row>
+      <ion-col col-8>
+        <ion-item>
+          <ion-input [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversion()"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item>
+            <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversion()">
+              <ion-option *ngFor="let c of coins; let i = index" [selected]="i==0" [value]="c">{{c.title}}</ion-option>
+            </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ng-template>
+
+<ng-template  #currencyToHtml>
+    <ion-row>
+        <ion-col col-8>
+          <ion-item>
+            <ion-input [(ngModel)]="currencyToAmount"  (ionChange)="refreshConversion()"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+        <ion-item>
+            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversion()">
+              <ion-option *ngFor="let cur of currency; let i = index" [selected]="i==0" [value]="cur">{{cur.title}}</ion-option>
+            </ion-select>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+    </ng-template >
+
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -14,41 +48,17 @@
     Select your coin type
   </p>
 
+  
+
   <ion-list>
-    <div #currencyFromHtml>
-      <ion-row>
-        <ion-col col-8>
-          <ion-item>
-            <ion-input [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversion()"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-4>
-          <ion-item>
-              <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversion()">
-                <ion-option *ngFor="let c of coins; let i = index" [selected]="i==0" [value]="c">{{c.title}}</ion-option>
-              </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+    <div>
+        <ng-container [ngTemplateOutlet]="topTemplate"></ng-container>
     </div>
     <ion-row>
             <button ion-button (click)="switchToAndFromCurrency()">Switch</button>
       </ion-row>
-    <div #currencyToHtml>
-    <ion-row>
-        <ion-col col-8>
-          <ion-item>
-            <ion-input [(ngModel)]="currencyToAmount"  (ionChange)="refreshConversion()"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-4>
-        <ion-item>
-            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversion()">
-              <ion-option *ngFor="let cur of currency; let i = index" [selected]="i==0" [value]="cur">{{cur.title}}</ion-option>
-            </ion-select>
-        </ion-item>
-      </ion-col>
-      </ion-row>
+    <div>
+        <ng-container [ngTemplateOutlet]="bottomTemplate"></ng-container>
     </div>
   </ion-list>
 </ion-content>
