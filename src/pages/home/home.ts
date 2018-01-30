@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild,ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CoinProvider } from '../../providers/coin/coin';
 
@@ -17,6 +17,9 @@ export class HomePage {
 
   currencyFromAmount:any;
   currencyToAmount:any;
+
+  @ViewChild('currencyFromHtml') currencyFromHtml: ElementRef;
+  @ViewChild('currencyToHtml') currencyToHtml: ElementRef;
 
   constructor(public navCtrl: NavController,public coinProvider:CoinProvider) {
 
@@ -54,6 +57,17 @@ export class HomePage {
   {
     console.log(this.currencyFrom);
     this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversion(data));
+  }
+
+  switchToAndFromCurrency()
+  {
+console.log(this.currencyToHtml.nativeElement.innerHTML);
+
+      let toHtml = this.currencyToHtml.nativeElement.innerHTML;
+      let fromHtml = this.currencyFromHtml.nativeElement.innerHTML;
+
+      this.currencyToHtml.nativeElement.innerHTML = fromHtml;
+      this.currencyFromHtml.nativeElement.innerHTML = toHtml;
   }
 
 }
