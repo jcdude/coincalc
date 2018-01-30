@@ -53,18 +53,22 @@ export class HomePage {
     let currencyToDefault = 'USD';
     this.currencyFromAmount = 1;
     this.currencyTo = this.currency[0];
+    this.currencyFrom = this.coins[0];
 
     this.coinProvider.getCoinValue(currencyFromDefaut,currencyToDefault).then(data => this.getConversion(data));
   }
 
   getConversion(data:any){
-    console.log(this.currencyTo);
+    console.log(this.currencyTo.value);
+    console.log(data);
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
     this.currencyToAmount = this.currencyFromAmount * data[0][symbol];
   }
 
   refreshConversion()
   {
+    console.log(this.currencyFrom);
+    console.log(this.currencyTo);
     this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversion(data));
   }
 
