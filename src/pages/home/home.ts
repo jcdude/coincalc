@@ -43,8 +43,8 @@ export class HomePage {
 
   ngOnInit() {
 
-    this.topTemplate = this.currencyFrom;
-    this.bottomTemplate = this.currencyTo;
+    this.topTemplate = this.currencyFromHtml;
+    this.bottomTemplate = this.currencyToHtml;
   }
 
   ionViewDidLoad() {
