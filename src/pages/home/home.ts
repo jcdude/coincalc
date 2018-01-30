@@ -65,11 +65,18 @@ export class HomePage {
     this.currencyToAmount = this.currencyFromAmount * data[0][symbol];
   }
 
-  refreshConversion()
+  refreshConversionCoin()
   {
     console.log(this.currencyFrom);
     console.log(this.currencyTo);
     this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversion(data));
+  }
+
+  refreshConversionCurrency()
+  {
+    console.log(this.currencyFrom);
+    console.log(this.currencyTo);
+    this.coinProvider.getCoinValue(this.currencyTo.value,this.currencyFrom.value).then(data => this.getConversion(data));
   }
 
   switchToAndFromCurrency()
