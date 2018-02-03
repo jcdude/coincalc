@@ -97,23 +97,6 @@ export class HomePage {
 
   switchToAndFromCurrency()
   {
-    console.log(this.currencyToInput);
-    if(this.conversionType == 1)
-    {
-      console.log('removed');
-      document.addEventListener('ionChange', this.currencyToInput.nativeElement , false);
-      document.removeEventListener('ionChange', this.currencyFromInput.nativeElement, false);
-
-      this.conversionType = 0;
-    }
-    else
-    {
-      document.addEventListener('ionChange', this.currencyFromInput.nativeElement , false);
-      document.removeEventListener('ionChange', this.currencyToInput.nativeElement, false);
-
-      this.conversionType = 1;
-    }
-
     let temp = this.topTemplate;
     this.topTemplate = this.bottomTemplate;
     this.bottomTemplate = temp;

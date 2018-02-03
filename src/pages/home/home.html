@@ -7,7 +7,7 @@
       </ion-col>
       <ion-col col-4>
         <ion-item>
-            <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversion()">
+            <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversionCoin()">
               <ion-option *ngFor="let c of coins; let i = index" [selected]="i==0" [value]="c">{{c.title}}</ion-option>
             </ion-select>
         </ion-item>
@@ -19,12 +19,12 @@
     <ion-row>
         <ion-col col-8>
           <ion-item>
-            <ion-input #currencyToInput [(ngModel)]="currencyToAmount"></ion-input>
+            <ion-input #currencyToInput [(ngModel)]="currencyToAmount" (ionChange)="refreshConversionCurrency()"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-4>
         <ion-item>
-            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversion()">
+            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversionCurrency()">
               <ion-option *ngFor="let cur of currency; let i = index" [selected]="i==0" [value]="cur">{{cur.title}}</ion-option>
             </ion-select>
         </ion-item>
