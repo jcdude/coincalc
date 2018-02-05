@@ -2,7 +2,7 @@
     <ion-row>
       <ion-col col-8>
         <ion-item>
-          <ion-input [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversionCoin()"></ion-input>
+          <ion-input #currencyFromInput [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversionCoin()"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-4>
@@ -19,7 +19,7 @@
     <ion-row>
         <ion-col col-8>
           <ion-item>
-            <ion-input [(ngModel)]="currencyToAmount"  (ionChange)="refreshConversionCurrency()"></ion-input>
+            <ion-input #currencyToInput [(ngModel)]="currencyToAmount"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col col-4>

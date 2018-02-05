@@ -1,4 +1,4 @@
-import { Component, ViewChild,TemplateRef } from '@angular/core';
+import { Component, ViewChild,TemplateRef,ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CoinProvider } from '../../providers/coin/coin';
 
@@ -21,8 +21,13 @@ export class HomePage {
   @ViewChild('currencyFromHtml') currencyFromHtml: TemplateRef<any>;
   @ViewChild('currencyToHtml') currencyToHtml: TemplateRef<any>;
 
+  @ViewChild('currencyFromInput') currencyFromInput: ElementRef;
+  @ViewChild('currencyToInput') currencyToInput: ElementRef;
+
   topTemplate: TemplateRef<any>;
   bottomTemplate: TemplateRef<any>;
+
+  conversionType = 1;
 
   constructor(public navCtrl: NavController,public coinProvider:CoinProvider) {
 
@@ -49,38 +54,66 @@ export class HomePage {
 
   ionViewDidLoad() {
 
+
     let currencyFromDefaut = 'bitcoin';
     let currencyToDefault = 'USD';
     this.currencyFromAmount = 1;
     this.currencyTo = this.currency[0];
     this.currencyFrom = this.coins[0];
 
-    this.coinProvider.getCoinValue(currencyFromDefaut,currencyToDefault).then(data => this.getConversion(data));
+    this.coinProvider.getCoinValue(currencyFromDefaut,currencyToDefault).then(data => this.getConversionCoin(data));
   }
 
-  getConversion(data:any){
+  getConversionCoin(data:any){
     console.log(this.currencyTo.value);
     console.log(data);
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
     this.currencyToAmount = this.currencyFromAmount * data[0][symbol];
+
+  }
+
+  getConversionCurrency(data:any){
+    console.log(this.currencyTo.value);
+    console.log(data);
+    let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
+    this.currencyFromAmount = this.currencyToAmount / data[0][symbol];
+
   }
 
   refreshConversionCoin()
   {
-    console.log(this.currencyFrom);
-    console.log(this.currencyTo);
-    this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversion(data));
+      console.log(this.currencyFrom);
+      console.log(this.currencyTo);
+      this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversionCoin(data));
   }
 
   refreshConversionCurrency()
   {
-    console.log(this.currencyFrom);
-    console.log(this.currencyTo);
-    this.coinProvider.getCoinValue(this.currencyTo.value,this.currencyFrom.value).then(data => this.getConversion(data));
+      console.log(this.currencyFrom);
+      console.log(this.currencyTo);
+      this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversionCurrency(data));
+    
   }
 
   switchToAndFromCurrency()
   {
+    console.log(this.currencyToInput);
+    if(this.conversionType == 1)
+    {
+      console.log('removed');
+      document.addEventListener('ionChange', this.currencyToInput.nativeElement , false);
+      document.removeEventListener('ionChange', this.currencyFromInput.nativeElement, false);
+
+      this.conversionType = 0;
+    }
+    else
+    {
+      document.addEventListener('ionChange', this.currencyFromInput.nativeElement , false);
+      document.removeEventListener('ionChange', this.currencyToInput.nativeElement, false);
+
+      this.conversionType = 1;
+    }
+
     let temp = this.topTemplate;
     this.topTemplate = this.bottomTemplate;
     this.bottomTemplate = temp;
