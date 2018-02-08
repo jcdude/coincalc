@@ -31,19 +31,19 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,public coinProvider:CoinProvider) {
 
-    this.coins = [
-      {title:'BTC',value:'bitcoin'},
-      {title:'ETH',value:'ethereum'},
-      {title:'XRP',value:'ripple'}
-    ];
-
-    this.currency = [
-      {title:'USA Dollar',value:'USD'},
-      {title:'EURO',value:'EUR'},
-      {title:'British Pount',value:'GBP'}
-    ];
-
-
+    this.coins = [{title:"BTC",value:"bitcoin"}];
+    this.currency = [{title:"USA Dollar",value:"USD"}];
+    this.coinProvider.getCoinTypes().then(data => console.log(data));
+    this.coinProvider.getCoinTypes().then(data => 
+      {
+        this.coins = data;
+        this.currencyFrom = this.coins[0];
+      });
+    this.coinProvider.getCurrencyTypes().then(data => 
+      {
+        this.currency = data;
+        this.currencyTo = this.currency[0];
+      });
   }
 
   ngOnInit() {
@@ -65,16 +65,14 @@ export class HomePage {
   }
 
   getConversionCoin(data:any){
-    console.log(this.currencyTo.value);
-    console.log(data);
+   
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
     this.currencyToAmount = this.currencyFromAmount * data[0][symbol];
 
   }
 
   getConversionCurrency(data:any){
-    console.log(this.currencyTo.value);
-    console.log(data);
+  
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
     this.currencyFromAmount = this.currencyToAmount / data[0][symbol];
 
@@ -82,15 +80,11 @@ export class HomePage {
 
   refreshConversionCoin()
   {
-      console.log(this.currencyFrom);
-      console.log(this.currencyTo);
       this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversionCoin(data));
   }
 
   refreshConversionCurrency()
   {
-      console.log(this.currencyFrom);
-      console.log(this.currencyTo);
       this.coinProvider.getCoinValue(this.currencyFrom.value,this.currencyTo.value).then(data => this.getConversionCurrency(data));
     
   }

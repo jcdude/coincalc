@@ -1,0 +1,5 @@
+[
+      {"title":"BTC","value":"bitcoin","selected":"true"},
+      {"title":"ETH","value":"ethereum","selected":"false"},
+      {"title":"XRP","value":"ripple","selected":"false"}
+]

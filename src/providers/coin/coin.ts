@@ -27,4 +27,26 @@ export class CoinProvider {
 
   }
 
+  getCoinTypes()
+  {
+    return new Promise(resolve => {
+      this.http.get('assets/data/coins.json').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getCurrencyTypes()
+  {
+    return new Promise(resolve => {
+      this.http.get('assets/data/currency.json').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
 }
