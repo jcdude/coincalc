@@ -7,9 +7,14 @@
       </ion-col>
       <ion-col col-6>
         <ion-item>
-            <ion-select [(ngModel)]="currencyFrom"  (ionChange)="refreshConversionCoin()">
-              <ion-option *ngFor="let c of coins" [value]="c">{{c.title}}</ion-option>
-            </ion-select>
+            <select-searchable
+                    [(ngModel)]="currencyFrom"
+                    [items]="coins"
+                    itemValueField="value"
+                    itemTextField="title"
+                    [canSearch]="true"
+                    (onChange)="refreshConversionCurrency()">
+            </select-searchable>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -23,11 +28,16 @@
           </ion-item>
         </ion-col>
         <ion-col col-6>
-        <ion-item>
-            <ion-select [(ngModel)]="currencyTo" (ionChange)="refreshConversionCurrency()">
-              <ion-option *ngFor="let cur of currency" [value]="cur">{{cur.title}}</ion-option>
-            </ion-select>
-        </ion-item>
+            <ion-item>
+                <select-searchable
+                        [(ngModel)]="currencyTo"
+                        [items]="currency"
+                        itemValueField="value"
+                        itemTextField="title"
+                        [canSearch]="true"
+                        (onChange)="refreshConversionCurrency()">
+                </select-searchable>
+            </ion-item>
       </ion-col>
       </ion-row>
     </ng-template >

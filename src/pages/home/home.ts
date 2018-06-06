@@ -67,14 +67,14 @@ export class HomePage {
   getConversionCoin(data:any){
    
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
-    this.currencyToAmount = this.currencyFromAmount * data[0][symbol];
+    this.currencyToAmount = Math.round((this.currencyFromAmount * data[0][symbol]) * 100) /100;
 
   }
 
   getConversionCurrency(data:any){
   
     let symbol = 'price_'+(this.currencyTo.value as String).toLocaleLowerCase();
-    this.currencyFromAmount = this.currencyToAmount / data[0][symbol];
+    this.currencyFromAmount = Math.round((this.currencyToAmount / data[0][symbol]) * 100) /100;
 
   }
 
