@@ -1,74 +1,83 @@
 <ng-template #currencyFromHtml>
     <ion-row>
-      <ion-col col-6>
-        <ion-item>
-          <ion-input #currencyFromInput [(ngModel)]="currencyFromAmount" (ionChange)="refreshConversionCoin()"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col col-6>
-        <ion-item>
-            <select-searchable
-                    [(ngModel)]="currencyFrom"
-                    [items]="coins"
-                    itemValueField="value"
-                    itemTextField="title"
-                    [canSearch]="true"
-                    (onChange)="refreshConversionCurrency()">
-            </select-searchable>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ng-template>
-
-<ng-template  #currencyToHtml>
-    <ion-row>
-        <ion-col col-6>
-          <ion-item>
-            <ion-input #currencyToInput [(ngModel)]="currencyToAmount" (ionChange)="refreshConversionCurrency()"></ion-input>
-          </ion-item>
+        <ion-col col-xl-4>
+            <ion-row>
+                <ion-col col-4>
+                    <ion-item>
+                        <ion-input #currencyFromInput [(ngModel)]="currencyFromAmount"
+                                   (ionChange)="refreshConversionCoin()"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-8>
+                    <ion-item>
+                        <select-searchable
+                                [(ngModel)]="currencyFrom"
+                                [items]="coins"
+                                itemValueField="value"
+                                itemTextField="title"
+                                [canSearch]="true"
+                                (onChange)="refreshConversionCurrency()">
+                        </select-searchable>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
         </ion-col>
-        <ion-col col-6>
-            <ion-item>
-                <select-searchable
-                        [(ngModel)]="currencyTo"
-                        [items]="currency"
-                        itemValueField="value"
-                        itemTextField="title"
-                        [canSearch]="true"
-                        (onChange)="refreshConversionCurrency()">
-                </select-searchable>
-            </ion-item>
-      </ion-col>
-      </ion-row>
-    </ng-template >
+    </ion-row>
+</ng-template>
+
+<ng-template #currencyToHtml>
+    <ion-row>
+        <ion-col col-xl-4>
+            <ion-row>
+                <ion-col col-4>
+                    <ion-item>
+                        <ion-input #currencyToInput [(ngModel)]="currencyToAmount"
+                                   (ionChange)="refreshConversionCurrency()"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-8>
+                    <ion-item>
+                        <select-searchable
+                                [(ngModel)]="currencyTo"
+                                [items]="currency"
+                                itemValueField="value"
+                                itemTextField="title"
+                                [canSearch]="true"
+                                (onChange)="refreshConversionCurrency()">
+                        </select-searchable>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ng-template>
 
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Calculator</h3>
+    <h3>Calculator</h3>
 
-  <p>
-    Select your coin type
-  </p>
+    <p>
+        Select your coin type
+    </p>
 
-  
 
-  <ion-list>
-    <div>
-        <ng-container [ngTemplateOutlet]="topTemplate"></ng-container>
-    </div>
-    <ion-row>
+    <ion-list>
+        <div>
+            <ng-container [ngTemplateOutlet]="topTemplate"></ng-container>
+        </div>
+        <ion-row>
             <button ion-button (click)="switchToAndFromCurrency()">Switch</button>
-      </ion-row>
-    <div>
-        <ng-container [ngTemplateOutlet]="bottomTemplate"></ng-container>
-    </div>
-  </ion-list>
+        </ion-row>
+        <div>
+            <ng-container [ngTemplateOutlet]="bottomTemplate"></ng-container>
+        </div>
+    </ion-list>
 </ion-content>
